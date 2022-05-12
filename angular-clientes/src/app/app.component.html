@@ -1,0 +1,83 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Gerenciamento de clientes</li>
+  </ol>
+</nav>
+<div class="container">
+  <div class="card list-cliente">
+    <h5 class="card-header">Lista de clientes</h5>
+    <div class="card-body">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Endereco</th>
+              <th scope="col">Bairro</th>
+              <th scope="col">DDD</th>
+              <th scope="col">Telefone</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cliente of clientes">
+              <td>{{cliente.id}}</td>
+              <td>{{cliente.nome}}</td>
+              <td>{{cliente.endereco}}</td>
+              <td>{{cliente.bairro}}</td>
+              <td>{{cliente.dddTelefone}}</td>
+              <td>{{cliente.numTelefone}}</td>
+              <td>
+                <button type="button" class="btn btn-warning btn-sm" (click)="editCliente(cliente)">Editar</button>
+                <button type="button" class="btn btn-danger btn-sm ml-1" (click)="deleteCliente(cliente)">Deletar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+
+  <div class="card add-cliente">
+      <h5 class="card-header">Adicionar/Atualizar cliente</h5>
+      <div class="card-body">
+          <form id="add-form" (ngSubmit)="f.form.valid && saveCliente(f)" #f="ngForm" novalidate>
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" [(ngModel)]="cliente.nome" id="nome" name="nome" #nome="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }" placeholder="Digite o nome">
+                <div *ngIf="f.submitted && nome.invalid" class="invalid-feedback">
+                    
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="endereco">Endereco</label>
+                <input type="text" [(ngModel)]="cliente.endereco" id="endereco" name="endereco" #endereco="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && endereco.invalid }" placeholder="Digite a endereco">
+                <div *ngIf="f.submitted && endereco.invalid" class="invalid-feedback">
+                    
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="bairro">Bairro</label>
+                <input type="text" [(ngModel)]="cliente.bairro" id="bairro" name="bairro" #bairro="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && bairro.invalid }" placeholder="Digite o bairro">
+                <div *ngIf="f.submitted && bairro.invalid" class="invalid-feedback">
+                    
+                </div>
+            </div>
+            <div class="form-group">
+              <label for="dddTelefone">DDD</label>
+              <input type="number" [(ngModel)]="cliente.dddTelefone" id="dddTelefone" name="dddTelefone" #dddTelefone="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && dddTelefone.invalid }" placeholder="Digite o DDD">
+              <div *ngIf="f.submitted" class="invalid-feedback">
+                  
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="numTelefone">Telefone</label>
+              <input type="number" [(ngModel)]="cliente.numTelefone" id="numTelefone" name="numTelefone" #dddTelefone="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && dddTelefone.invalid }" placeholder="Digite o telefone">
+              <div *ngIf="f.submitted" class="invalid-feedback">
+                  
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-add-cliente">Salvar</button>
+            <button type="reset" class="btn btn-secondary btn-add-cliente" (click)="cleanForm(f)">Cancelar</button>
+          </form>
+      </div>
+    </div>
+</div>
